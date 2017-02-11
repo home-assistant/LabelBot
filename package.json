@@ -1,0 +1,32 @@
+{
+  "name": "label-bot",
+  "version": "1.0.0",
+  "description": "A Lambda function that labels Home Assistant pull requests.",
+  "main": "handler.js",
+  "dependencies": {
+    "buffer-equal-constant-time": "^1.0.1",
+    "github": "^8.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/HomeAssistant/LabelBot.git"
+  },
+  "keywords": [
+    "lambda",
+    "github",
+    "labels"
+  ],
+  "author": {
+    "name": "Robbie Trencheny",
+    "url": "https://twitter.com/robbie"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/HomeAssistant/LabelBot/issues"
+  },
+  "homepage": "https://github.com/HomeAssistant/LabelBot#readme"
+}
