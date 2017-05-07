@@ -1,13 +1,27 @@
+var noEntityComponent = ['zwave'];
+
 module.exports = function (payload, githubApi, files) {
   var fileNames = files.filter(function(file){
-    return (file.filename.indexOf('homeassistant/components/') > -1 && file.filename.indexOf('homeassistant/components/frontend') === -1);
+    return (file.filename.indexOf('homeassistant/components/') > -1 &&
+            file.filename.indexOf('homeassistant/components/frontend') === -1 &&
+            file.filename.indexOf('services.yaml') === -1);
   }).map(function(file){
-    var stripHass = file.filename.replace('homeassistant/components/', '');
-    var stripExtension = stripHass.replace('.py', '');
-    var stripInit = stripExtension.replace('/__init__', '');
-    var label = stripInit.replace('/', '.');
-    var word = (label.indexOf('.') > -1) ? 'platform' : 'component';
-    return word+': '+label;
+    var parts = file.filename.replace('homeassistant/components/', '').split('/');
+    var type;
+
+    if (parts.length == 1) {
+      type = 'component';
+      label = parts[0]
+    } else if (parts.length == 2 && noEntityComponent.indexOf(parts[0]) > -1) {
+      type = 'component';
+      label = parts[0]
+    } else {
+      type = 'platform';
+      label = parts[0] + '.' + parts[1];
+    }
+
+    label = label.replace('.py', '')
+    return type + ': ' + label;
   });
   return fileNames;
 };
