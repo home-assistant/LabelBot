@@ -11,10 +11,13 @@ module.exports = function (payload, githubApi, files) {
 
     if (parts.length == 1) {
       type = 'component';
-      label = parts[0]
+      label = parts[0];
     } else if (parts.length == 2 && noEntityComponent.indexOf(parts[0]) > -1) {
       type = 'component';
-      label = parts[0]
+      label = parts[0];
+    } else if (parts.length == 2 && parts[1] == '__init__.py') {
+      type = 'component';
+      label = parts[0];
     } else {
       type = 'platform';
       label = parts[0] + '.' + parts[1];
