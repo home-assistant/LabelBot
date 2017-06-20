@@ -43,3 +43,8 @@ test('generic services', (t) => {
   t.deepEqual(getOutput('services.yaml'), null);
   t.end();
 });
+
+test('component init file', (t) => {
+  t.deepEqual(getOutput('cover/__init__.py'), 'component: cover');
+  t.end();
+})
