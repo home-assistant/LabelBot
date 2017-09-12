@@ -1,4 +1,4 @@
-var noEntityComponent = ['zwave', 'http', 'recorder', 'mqtt'];
+var noEntityComponent = ['zwave', 'http', 'recorder', 'mqtt', 'alexa', 'cloud'];
 
 module.exports = function (payload, githubApi, files) {
   var fileNames = files.filter(function(file){
