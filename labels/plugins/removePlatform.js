@@ -1,4 +1,4 @@
-module.exports = function (payload, githubApi, files) {
+module.exports = function (payload, githubApi, files, parsed) {
   var removesPlatform = false;
   var fileNames = files.filter(function(file){
     return file.filename.indexOf('homeassistant/components/') > -1;

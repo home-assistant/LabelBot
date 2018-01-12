@@ -76,6 +76,7 @@ module.exports = function(path) {
   if (parts.shift() !== 'homeassistant') return null;
 
   const result = {
+    path,
     core: false,
     type: null,
     component: null,
@@ -124,6 +125,5 @@ module.exports = function(path) {
       coreComponentPlatforms.includes(result.component)) {
     result.core = true;
   }
-
   return result;
 }

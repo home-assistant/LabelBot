@@ -3,7 +3,10 @@
 var crypto = require('crypto')
   , bufferEq = require('buffer-equal-constant-time')
   , GitHubApi = require('github')
+  , parsePath = require('./labels/util/parse_path')
+  , processFiles = require('./labels/process')
   , github = new GitHubApi();
+
 github.authenticate({ type: 'oauth', token: process.env.GITHUB_TOKEN });
 
 module.exports.receiveWebhook = (event, context, callback) => {
@@ -21,7 +24,6 @@ module.exports.receiveWebhook = (event, context, callback) => {
     return
   }
   console.log('Received event of type', eventType);
-  var labels = [];
   github.pullRequests.getFiles({
     owner: body.repository.owner.login,
     repo: body.repository.name,
@@ -31,10 +33,9 @@ module.exports.receiveWebhook = (event, context, callback) => {
       callback(new Error(err));
       return
     }
-    labels = labels.concat(require('./labels/componentAndPlatform')(body, github, files));
-    labels = labels.concat(require('./labels/newPlatform')(body, github, files));
-    labels = labels.concat(require('./labels/removePlatform')(body, github, files));
-    labels = labels.concat(require('./labels/warnOnMergeToMaster')(body, github, files));
+
+    const labels = processFiles(body, github, files);
+
     console.log('Adding labels', labels);
     if (labels.length > 0 && labels.length < 10) {
       github.issues.addLabels({

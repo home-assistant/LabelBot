@@ -1,11 +1,11 @@
 var assert = require('assert');
 
-var comp = require('../labels/componentAndPlatform');
+var comp = require('../../labels/plugins/componentAndPlatform');
+var parsePath = require('../../labels/util/parse_path');
 
 function getOutput (file) {
-  var output = comp(null, null, [
-    {filename: 'homeassistant/components/' + file}
-  ]);
+  const filename = 'homeassistant/components/' + file;
+  var output = comp(null, null, [{filename}], [parsePath(filename)]);
   return output.length ? output[0] : null
 }
 
