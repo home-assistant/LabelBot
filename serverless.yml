@@ -1,18 +1,21 @@
 service: LabelBot
 
+custom: ${file(./config.yml)}
+
 provider:
   name: aws
-  runtime: nodejs4.3
-  stage: Production
+  runtime: nodejs6.10
+  stage: ${opt:stage, 'dev'}
 
 functions:
   LabelBot:
     handler: "handler.receiveWebhook"
     description: A Lambda function to label things on Home Assistant repositories
-    memorySize: 512
+    memorySize: 128
     timeout: 10
     environment:
-      GITHUB_TOKEN: 'YOUR_TOKEN'
-      GITHUB_SECRET: 'YOUR_SECRET'
+      STAGE: ${self:provider.stage}
+      GITHUB_TOKEN: ${self:custom.github_token}
+      GITHUB_SECRET: ${self:custom.github_secret}
     events:
       - http: POST github/webhook

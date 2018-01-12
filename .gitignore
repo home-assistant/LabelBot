@@ -1,5 +1,5 @@
 node_modules/
 .serverless/
-serverless.yml
+config.yml
 .DS_Store
 testData/
