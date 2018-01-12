@@ -1,4 +1,4 @@
-var test = require('tape');
+var assert = require('assert');
 
 var comp = require('../labels/componentAndPlatform');
 
@@ -9,42 +9,36 @@ function getOutput (file) {
   return output.length ? output[0] : null
 }
 
-test('single component file', (t) => {
-  t.deepEqual(getOutput('browser.py'), 'component: browser');
-  t.end();
-});
+describe('componentAndPlatform', () => {
+  it('single component file', () => {
+    assert.deepEqual(getOutput('browser.py'), 'component: browser');
+  });
 
-test('component dir init', (t) => {
-  t.deepEqual(getOutput('zwave/__init__.py'), 'component: zwave');
-  t.end();
-});
+  it('component dir init', () => {
+    assert.deepEqual(getOutput('zwave/__init__.py'), 'component: zwave');
+  });
 
-test('component dir file', (t) => {
-  t.deepEqual(getOutput('zwave/const.py'), 'component: zwave');
-  t.end();
-});
+  it('component dir file', () => {
+    assert.deepEqual(getOutput('zwave/const.py'), 'component: zwave');
+  });
 
-test('platform file', (t) => {
-  t.deepEqual(getOutput('light/hue.py'), 'platform: light.hue');
-  t.end();
-});
+  it('platform file', () => {
+    assert.deepEqual(getOutput('light/hue.py'), 'platform: light.hue');
+  });
 
-test('platform dir', (t) => {
-  t.deepEqual(getOutput('light/lifx/const.py'), 'platform: light.lifx');
-  t.end();
-});
+  it('platform dir', () => {
+    assert.deepEqual(getOutput('light/lifx/const.py'), 'platform: light.lifx');
+  });
 
-test('component services', (t) => {
-  t.deepEqual(getOutput('light/services.yaml'), null);
-  t.end();
-});
+  it('component services', () => {
+    assert.deepEqual(getOutput('light/services.yaml'), null);
+  });
 
-test('generic services', (t) => {
-  t.deepEqual(getOutput('services.yaml'), null);
-  t.end();
-});
+  it('generic services', () => {
+    assert.deepEqual(getOutput('services.yaml'), null);
+  });
 
-test('component init file', (t) => {
-  t.deepEqual(getOutput('cover/__init__.py'), 'component: cover');
-  t.end();
-})
+  it('component init file', () => {
+    assert.deepEqual(getOutput('cover/__init__.py'), 'component: cover');
+  })
+});

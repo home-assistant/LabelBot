@@ -8,14 +8,12 @@
     "github": "^8.1.1"
   },
   "devDependencies": {
-    "faucet": "^0.0.1",
-    "serverless": "^1.25.0",
-    "tape": "^4.6.3",
-    "tape-watch": "^2.3.0"
+    "mocha": "^4.1.0",
+    "serverless": "^1.25.0"
   },
   "scripts": {
-    "test": "tape test/**/*.spec.js | faucet",
-    "test-watch": "tape-watch test/**/*.spec.js | faucet"
+    "test": "mocha",
+    "test-watch": "mocha --watch"
   },
   "repository": {
     "type": "git",
