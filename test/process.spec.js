@@ -10,6 +10,7 @@ describe('process', () => {
       'homeassistant/components/services.yaml',
       'homeassistant/components/mqtt/server.py',
       'homeassistant/const.py',
+      'tests/components/cloud/test_iot.py',
     ];
 
     files = filenames.map(filename => ({filename}));
