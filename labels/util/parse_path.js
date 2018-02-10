@@ -9,6 +9,7 @@ var noEntityComponent = [
   'recorder',
   'zwave',
   'scene',
+  'zha',
 ];
 
 var coreComponents = [
