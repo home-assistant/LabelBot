@@ -6,7 +6,8 @@ const PLUGINS = [
   'newPlatform',
   'removePlatform',
   'warnOnMergeToMaster',
-  'markCore'
+  'markCore',
+  'smallPR'
 ];
 
 module.exports = function(body, github, files) {
