@@ -4,6 +4,7 @@ var noEntityComponent = [
   'cloud',
   'config',
   'google_assistant',
+  'hassio',
   'http',
   'mqtt',
   'recorder',
