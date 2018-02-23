@@ -94,4 +94,13 @@ describe('parsePath', () => {
     assert.equal(result.platform, null);
     assert.equal(result.type, 'services');
   });
+
+  it('detects component init', () => {
+    result = parsePath('homeassistant/components/__init__.py');
+    console.log(result)
+    assert.equal(result.core, true);
+    assert.equal(result.component, null);
+    assert.equal(result.platform, null);
+    assert.equal(result.type, 'core');
+  });
 });

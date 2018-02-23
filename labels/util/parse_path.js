@@ -101,6 +101,9 @@ module.exports = function(path) {
   if (parts.length == 1) {
     if (parts[0] === 'services.yaml') {
       result.type = 'services';
+    } else if (parts[0] === '__init__.py') {
+      result.core = true;
+      result.type = 'core'
     } else {
       result.type = 'component';
       result.component = parts[0].replace('.py', '');
