@@ -5,6 +5,7 @@ var noEntityComponent = [
   'config',
   'google_assistant',
   'hassio',
+  'homekit',
   'http',
   'mqtt',
   'recorder',
