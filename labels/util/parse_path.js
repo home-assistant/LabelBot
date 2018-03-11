@@ -1,17 +1,24 @@
 // Components that have multiple files that are not integrations
-var noEntityComponent = [
-  'alexa',
-  'cloud',
-  'config',
-  'google_assistant',
-  'hassio',
-  'homekit',
-  'http',
-  'mqtt',
-  'recorder',
-  'zwave',
+var entityComponent = [
+  'alarm_control_panel',
+  'automation',
+  'binary_sensor',
+  'calendar',
+  'camera',
+  'climate',
+  'cover',
+  'fan',
+  'image_processing',
+  'light',
+  'lock',
+  'mailbox',
+  'media_player',
+  'remote',
   'scene',
-  'zha',
+  'sensor',
+  'switch',
+  'vacuum',
+  'weather',
 ];
 
 var coreComponents = [
@@ -116,8 +123,7 @@ module.exports = function(path) {
 
   if (parts[0] === 'services.yaml') {
     result.type = 'services'
-  } else if (parts[0] == '__init__.py' ||
-      noEntityComponent.includes(result.component)) {
+  } else if (parts[0] == '__init__.py' || !entityComponent.includes(result.component)) {
     result.type = 'component';
   } else {
     result.type = 'platform';

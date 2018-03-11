@@ -97,7 +97,6 @@ describe('parsePath', () => {
 
   it('detects component init', () => {
     result = parsePath('homeassistant/components/__init__.py');
-    console.log(result)
     assert.equal(result.core, true);
     assert.equal(result.component, null);
     assert.equal(result.platform, null);
