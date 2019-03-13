@@ -22,6 +22,10 @@ describe('componentAndPlatform', () => {
     assert.deepEqual(getOutput('zwave/const.py'), 'component: zwave');
   });
 
+  it('component dir plaform file', () => {
+    assert.deepEqual(getOutput('zwave/light.py'), 'platform: zwave.light');
+  });
+
   it('platform file', () => {
     assert.deepEqual(getOutput('light/hue.py'), 'platform: light.hue');
   });

@@ -1,5 +1,6 @@
 // Components that have multiple files that are not integrations
 var entityComponent = [
+  'air_quality',
   'alarm_control_panel',
   'automation',
   'binary_sensor',
@@ -7,35 +8,38 @@ var entityComponent = [
   'camera',
   'climate',
   'cover',
+  'device_tracker',
   'fan',
+  'geo_location',
   'image_processing',
   'light',
   'lock',
   'mailbox',
   'media_player',
+  'notify',
   'remote',
   'scene',
   'sensor',
   'switch',
+  'tts',
   'vacuum',
+  'water_heater',
   'weather',
 ];
 
-var coreComponents = [
-  'alarm_control_panel',
+var coreComponents = entityComponent.concat([
   'alexa',
   'api',
-  'automation',
-  'binary_sensor',
-  'camera',
-  'climate',
+  'auth',
   'cloud',
+  'config',
   'configurator',
   'conversation',
   'counter',
-  'cover',
-  'device_tracker',
-  'fan',
+  'default_config',
+  'demo',
+  'discovery',
+  'ffmpeg',
   'frontend',
   'google_assistant',
   'group',
@@ -48,35 +52,39 @@ var coreComponents = [
   'input_select',
   'input_text',
   'introduction',
-  'light',
-  'lock',
+  'ios',
+  'logbook',
   'logger',
+  'lovelace',
   'map',
-  'media_player',
+  'mobile_app',
   'mqtt',
-  'notify',
+  'onboarding',
   'panel_custom',
   'panel_iframe',
   'persistent_notification',
+  'person',
   'recorder',
-  'scene',
   'script',
-  'sensor',
+  'scene',
   'shell_command',
   'shopping_list',
+  'stream',
   'sun',
-  'switch',
+  'system_health',
+  'system_log',
   'timer',
   'updater',
-  'vacuum',
-  'weather',
+  'webhook',
   'weblink',
   'websocket_api',
   'zone',
-];
+]);
 
 var coreComponentPlatforms = [
   'automation',
+  'demo',
+  'mqtt',
 ];
 
 module.exports = function(path) {
@@ -123,19 +131,24 @@ module.exports = function(path) {
 
   if (parts[0] === 'services.yaml') {
     result.type = 'services'
-  } else if (parts[0] == '__init__.py' || !entityComponent.includes(result.component)) {
+  } else if (parts[0] == '__init__.py') {
+    result.type = 'component';
+  } else if (!entityComponent.includes(result.component) && 
+      !entityComponent.includes(parts[0].replace('.py', ''))) {
     result.type = 'component';
   } else {
     result.type = 'platform';
     result.platform = parts[0].replace('.py', '');
   }
 
-  if (result.type === 'component' &&
-      coreComponents.includes(result.component)) {
-    result.core = true;
-  } else if (result.type === 'platform' &&
-      coreComponentPlatforms.includes(result.component)) {
-    result.core = true;
+  if (coreComponents.includes(result.component)) {
+    if (result.type !== 'platform' && result.type !== 'services'
+        || !entityComponent.includes(result.component)) {
+      result.core = true;
+    } else if (result.type === 'platform'
+        && coreComponentPlatforms.includes(result.component)) {
+      result.core = true;
+    }
   }
   return result;
 }

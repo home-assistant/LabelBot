@@ -102,4 +102,20 @@ describe('parsePath', () => {
     assert.equal(result.platform, null);
     assert.equal(result.type, 'core');
   });
+
+  it('detect new component structure', () => {
+    result = parsePath('homeassistant/components/hue/auth.py');
+    assert.equal(result.core, false);
+    assert.equal(result.component, 'hue');
+    assert.equal(result.platform, null);
+    assert.equal(result.type, 'component');
+  });
+
+  it('detect new component platform structure', () => {
+    result = parsePath('homeassistant/components/hue/light.py');
+    assert.equal(result.core, false);
+    assert.equal(result.component, 'hue');
+    assert.equal(result.platform, 'light');
+    assert.equal(result.type, 'platform');
+  });
 });
