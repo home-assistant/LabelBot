@@ -23,15 +23,15 @@ describe('componentAndPlatform', () => {
   });
 
   it('component dir plaform file', () => {
-    assert.deepEqual(getOutput('zwave/light.py'), 'platform: zwave.light');
+    assert.deepEqual(getOutput('zwave/light.py'), 'component: zwave');
   });
 
   it('platform file', () => {
-    assert.deepEqual(getOutput('light/hue.py'), 'platform: light.hue');
+    assert.deepEqual(getOutput('hue/light.py'), 'component: hue');
   });
 
   it('platform dir', () => {
-    assert.deepEqual(getOutput('light/lifx/const.py'), 'platform: light.lifx');
+    assert.deepEqual(getOutput('lifx/light/const.py'), 'component: lifx');
   });
 
   it('component services', () => {
