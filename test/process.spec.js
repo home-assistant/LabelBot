@@ -24,9 +24,9 @@ describe('process', () => {
     }, null, files);
     result.sort();
     assert.deepEqual(result, [
-      'component: hue',
-      'component: mqtt',
       'core',
+      'integration: hue',
+      'integration: mqtt',
       'merging-to-master',
     ]);
   });

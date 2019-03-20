@@ -11,27 +11,27 @@ function getOutput (file) {
 
 describe('componentAndPlatform', () => {
   it('single component file', () => {
-    assert.deepEqual(getOutput('browser.py'), 'component: browser');
+    assert.deepEqual(getOutput('browser.py'), 'integration: browser');
   });
 
   it('component dir init', () => {
-    assert.deepEqual(getOutput('zwave/__init__.py'), 'component: zwave');
+    assert.deepEqual(getOutput('zwave/__init__.py'), 'integration: zwave');
   });
 
   it('component dir file', () => {
-    assert.deepEqual(getOutput('zwave/const.py'), 'component: zwave');
+    assert.deepEqual(getOutput('zwave/const.py'), 'integration: zwave');
   });
 
   it('component dir plaform file', () => {
-    assert.deepEqual(getOutput('zwave/light.py'), 'component: zwave');
+    assert.deepEqual(getOutput('zwave/light.py'), 'integration: zwave');
   });
 
   it('platform file', () => {
-    assert.deepEqual(getOutput('hue/light.py'), 'component: hue');
+    assert.deepEqual(getOutput('hue/light.py'), 'integration: hue');
   });
 
   it('platform dir', () => {
-    assert.deepEqual(getOutput('lifx/light/const.py'), 'component: lifx');
+    assert.deepEqual(getOutput('lifx/light/const.py'), 'integration: lifx');
   });
 
   it('component services', () => {
@@ -43,6 +43,6 @@ describe('componentAndPlatform', () => {
   });
 
   it('component init file', () => {
-    assert.deepEqual(getOutput('cover/__init__.py'), 'component: cover');
+    assert.deepEqual(getOutput('cover/__init__.py'), 'integration: cover');
   })
 });
