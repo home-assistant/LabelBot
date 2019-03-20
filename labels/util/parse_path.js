@@ -1,4 +1,3 @@
-// Components that have multiple files that are not integrations
 var entityComponent = [
   'air_quality',
   'alarm_control_panel',
@@ -128,25 +127,11 @@ module.exports = function(path) {
   }
 
   result.component = parts.shift();
-
-  if (parts[0] === 'services.yaml') {
-    result.type = 'services'
-  } else if (parts[0] == '__init__.py') {
-    result.type = 'component';
-  } else if (!entityComponent.includes(result.component) && 
-      !entityComponent.includes(parts[0].replace('.py', ''))) {
-    result.type = 'component';
-  } else {
-    result.type = 'platform';
-    result.platform = parts[0].replace('.py', '');
-  }
+  result.type = parts[0] === 'services.yaml' ? 'services' : 'component';
 
   if (coreComponents.includes(result.component)) {
     if (result.type !== 'platform' && result.type !== 'services'
         || !entityComponent.includes(result.component)) {
-      result.core = true;
-    } else if (result.type === 'platform'
-        && coreComponentPlatforms.includes(result.component)) {
       result.core = true;
     }
   }

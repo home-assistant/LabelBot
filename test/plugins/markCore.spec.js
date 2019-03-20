@@ -30,17 +30,12 @@ describe('markCore', () => {
     assert.deepEqual(getOutput('hue/config.py'), null);
   });
 
-  it('non-core component plaftform file', () => {
+  it('non-core component platform file', () => {
     assert.deepEqual(getOutput('hue/light.py'), null);
   });
 
   it('entity component', () => {
     assert.deepEqual(getOutput('light/__init__.py'), 'core');
-  });
-
-  it('entity component platform file, legacy', () => {
-    // TODO: need to change after all (or most) platforms move to components
-    assert.deepEqual(getOutput('light/hue.py'), null);
   });
 
   it('coer entity component', () => {

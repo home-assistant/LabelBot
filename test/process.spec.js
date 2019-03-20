@@ -6,7 +6,7 @@ describe('process', () => {
   it('should work', () => {
 
     filenames = [
-      'homeassistant/components/light/hue.py',
+      'homeassistant/components/hue/light.py',
       'homeassistant/components/services.yaml',
       'homeassistant/components/mqtt/server.py',
       'homeassistant/const.py',
@@ -24,10 +24,10 @@ describe('process', () => {
     }, null, files);
     result.sort();
     assert.deepEqual(result, [
+      'component: hue',
       'component: mqtt',
       'core',
       'merging-to-master',
-      'platform: light.hue'
     ]);
   });
 });

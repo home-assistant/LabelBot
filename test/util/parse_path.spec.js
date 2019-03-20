@@ -67,16 +67,16 @@ describe('parsePath', () => {
     result = parsePath('homeassistant/components/automation/state.py');
     assert.equal(result.core, true);
     assert.equal(result.component, 'automation');
-    assert.equal(result.platform, 'state');
-    assert.equal(result.type, 'platform');
+    assert.equal(result.platform, null);
+    assert.equal(result.type, 'component');
   });
 
-  it('detect platform', () => {
-    result = parsePath('homeassistant/components/light/hue.py');
+  it('detect embedded platform', () => {
+    result = parsePath('homeassistant/components/hue/light.py');
     assert.equal(result.core, false);
-    assert.equal(result.component, 'light');
-    assert.equal(result.platform, 'hue');
-    assert.equal(result.type, 'platform');
+    assert.equal(result.component, 'hue');
+    assert.equal(result.platform, null);
+    assert.equal(result.type, 'component');
   });
 
   it('mark core services', () => {
@@ -115,7 +115,7 @@ describe('parsePath', () => {
     result = parsePath('homeassistant/components/hue/light.py');
     assert.equal(result.core, false);
     assert.equal(result.component, 'hue');
-    assert.equal(result.platform, 'light');
-    assert.equal(result.type, 'platform');
+    assert.equal(result.platform, null);
+    assert.equal(result.type, 'component');
   });
 });
