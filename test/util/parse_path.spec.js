@@ -31,14 +31,6 @@ describe('parsePath', () => {
     assert.equal(result.type, 'scripts');
   });
 
-  it('detect component from component that is a single file', () => {
-    result = parsePath('homeassistant/components/keyboard.py');
-    assert.equal(result.core, false);
-    assert.equal(result.component, 'keyboard');
-    assert.equal(result.platform, null);
-    assert.equal(result.type, 'component');
-  });
-
   it('detect component from component that is dir with init file', () => {
     result = parsePath('homeassistant/components/group/__init__.py');
     assert.equal(result.core, true);
@@ -75,32 +67,16 @@ describe('parsePath', () => {
     result = parsePath('homeassistant/components/hue/light.py');
     assert.equal(result.core, false);
     assert.equal(result.component, 'hue');
-    assert.equal(result.platform, null);
-    assert.equal(result.type, 'component');
-  });
-
-  it('mark core services', () => {
-    result = parsePath('homeassistant/components/services.yaml');
-    assert.equal(result.core, false);
-    assert.equal(result.component, null);
-    assert.equal(result.platform, null);
-    assert.equal(result.type, 'services');
+    assert.equal(result.platform, 'light');
+    assert.equal(result.type, 'platform');
   });
 
   it('mark component services', () => {
     result = parsePath('homeassistant/components/light/services.yaml');
-    assert.equal(result.core, false);
+    assert.equal(result.core, true);
     assert.equal(result.component, 'light');
     assert.equal(result.platform, null);
     assert.equal(result.type, 'services');
-  });
-
-  it('detects component init', () => {
-    result = parsePath('homeassistant/components/__init__.py');
-    assert.equal(result.core, true);
-    assert.equal(result.component, null);
-    assert.equal(result.platform, null);
-    assert.equal(result.type, 'core');
   });
 
   it('detect new component structure', () => {
@@ -115,7 +91,7 @@ describe('parsePath', () => {
     result = parsePath('homeassistant/components/hue/light.py');
     assert.equal(result.core, false);
     assert.equal(result.component, 'hue');
-    assert.equal(result.platform, null);
-    assert.equal(result.type, 'component');
+    assert.equal(result.platform, 'light');
+    assert.equal(result.type, 'platform');
   });
 });

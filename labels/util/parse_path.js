@@ -27,27 +27,23 @@ module.exports = function(path) {
     return result;
   }
 
-  if (parts.length == 1) {
-    if (parts[0] === 'services.yaml') {
-      result.type = 'services';
-    } else if (parts[0] === '__init__.py') {
-      result.core = true;
-      result.type = 'core'
-    } else {
-      result.type = 'component';
-      result.component = parts[0].replace('.py', '');
-    }
+  // This is not possible anymore after great migration
+  if (parts.length < 2) {
     return result;
   }
 
   result.component = parts.shift();
-  result.type = parts[0] === 'services.yaml' ? 'services' : 'component';
-
-  if (coreComponents.includes(result.component)) {
-    if (result.type !== 'platform' && result.type !== 'services'
-        || !entityComponent.includes(result.component)) {
-      result.core = true;
-    }
+  filename = parts[0].replace('.py', '')
+  if (filename === 'services.yaml') {
+    result.type = 'services';
+  } else if (entityComponent.includes(filename)) {
+    result.type = 'platform';
+    result.platform = filename;
+  } else {
+    result.type = 'component';
   }
+
+  result.core = coreComponents.includes(result.component);
+
   return result;
 }

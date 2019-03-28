@@ -11,7 +11,7 @@ function getOutput (file) {
 
 describe('componentAndPlatform', () => {
   it('single component file', () => {
-    assert.deepEqual(getOutput('browser.py'), 'integration: browser');
+    assert.deepEqual(getOutput('browser/__init__.py'), 'integration: browser');
   });
 
   it('component dir init', () => {
