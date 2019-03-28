@@ -13,7 +13,7 @@ describe('process', () => {
       'tests/components/cloud/test_iot.py',
     ];
 
-    files = filenames.map(filename => ({filename}));
+    files = filenames.map(filename => ({filename, status: 'added'}));
 
     const result = process({
         pull_request: {
@@ -28,6 +28,7 @@ describe('process', () => {
       'integration: hue',
       'integration: mqtt',
       'merging-to-master',
+      'new-platform'
     ]);
   });
 });

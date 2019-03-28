@@ -8,6 +8,7 @@ module.exports = function(path) {
 
   const result = {
     path,
+    filename: parts[parts.length - 1],
     core: false,
     type: null,
     component: null,

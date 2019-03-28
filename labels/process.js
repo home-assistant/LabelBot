@@ -3,6 +3,7 @@ const parsePath = require('./util/parse_path');
 
 const PLUGINS = [
   'componentAndPlatform',
+  'newIntegration',
   'newPlatform',
   'removePlatform',
   'warnOnMergeToMaster',
@@ -11,7 +12,14 @@ const PLUGINS = [
 ];
 
 module.exports = function(body, github, files) {
-  const parsed = files.map(file => parsePath(file.filename)).filter(file => file !== null);
+  const parsed = files.map(file => {
+    const parsedFile = parsePath(file.filename);
+    if (parsedFile === null) {
+      return null;
+    }
+    parsedFile.status = file.status;
+    return parsedFile;
+  }).filter(file => file !== null);
   const labelSet = new Set();
 
   PLUGINS.forEach(name => {
