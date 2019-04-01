@@ -1,27 +1,32 @@
-const { entityComponent, coreComponents } = require('../const');
+const { entityComponent, coreComponents } = require("../const");
 
-module.exports = function(path) {
-  const parts = path.split('/');
+module.exports = function(file) {
+  const parts = file.filename.split("/");
 
-  // filter out all but the src
-  if (parts.shift() !== 'homeassistant') return null;
+  const rootFolder = parts.shift();
 
   const result = {
-    path,
+    additions: file.additions,
+    status: file.status,
+    path: file.filename,
     filename: parts[parts.length - 1],
     core: false,
     type: null,
     component: null,
-    platform: null,
+    platform: null
   };
+
+  if (!["tests", "homeassistant"].includes(rootFolder)) {
+    return null;
+  }
 
   const subfolder = parts.shift();
 
-  if (subfolder !== 'components') {
+  if (subfolder !== "components") {
     result.core = true;
 
-    if (subfolder.endsWith('.py')) {
-      result.type = 'core';
+    if (subfolder.endsWith(".py")) {
+      result.type = "core";
     } else {
       result.type = subfolder;
     }
@@ -34,17 +39,24 @@ module.exports = function(path) {
   }
 
   result.component = parts.shift();
-  filename = parts[0].replace('.py', '')
-  if (filename === 'services.yaml') {
-    result.type = 'services';
+  let filename = parts[0].replace(".py", "");
+
+  if (rootFolder === "tests") {
+    result.type = "test";
+    filename = filename.replace("test_", "");
+    if (entityComponent.includes(filename)) {
+      result.platform = filename;
+    }
+  } else if (filename === "services.yaml") {
+    result.type = "services";
   } else if (entityComponent.includes(filename)) {
-    result.type = 'platform';
+    result.type = "platform";
     result.platform = filename;
   } else {
-    result.type = 'component';
+    result.type = "component";
   }
 
   result.core = coreComponents.includes(result.component);
 
   return result;
-}
+};

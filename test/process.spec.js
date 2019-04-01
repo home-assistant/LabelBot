@@ -1,34 +1,41 @@
-var assert = require('assert');
+var assert = require("assert");
 
-var process = require('../labels/process');
+var process = require("../labels/process");
 
-describe('process', () => {
-  it('should work', () => {
-
+describe("process", () => {
+  it("should work", () => {
     filenames = [
-      'homeassistant/components/hue/light.py',
-      'homeassistant/components/services.yaml',
-      'homeassistant/components/mqtt/server.py',
-      'homeassistant/const.py',
-      'tests/components/cloud/test_iot.py',
+      "homeassistant/components/hue/light.py",
+      "homeassistant/components/mqtt/server.py",
+      "homeassistant/const.py",
+      "tests/components/cloud/test_iot.py"
     ];
 
-    files = filenames.map(filename => ({filename, status: 'added'}));
+    files = filenames.map(filename => ({
+      filename,
+      status: "added",
+      additions: 200
+    }));
 
-    const result = process({
+    const result = process(
+      {
         pull_request: {
           base: {
-            ref: 'master'
+            ref: "master"
           }
         }
-    }, null, files);
+      },
+      null,
+      files
+    );
     result.sort();
     assert.deepEqual(result, [
-      'core',
-      'integration: hue',
-      'integration: mqtt',
-      'merging-to-master',
-      'new-platform'
+      "core",
+      "has-tests",
+      "integration: hue",
+      "integration: mqtt",
+      "merging-to-master",
+      "new-platform"
     ]);
   });
 });
