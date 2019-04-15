@@ -13,7 +13,7 @@ const PLUGINS = [
 ];
 
 module.exports = function(body, github, files) {
-  const parsed = files.map(parsePath).filter(Boolean);
+  const parsed = files.map(parsePath);
   const labelSet = new Set();
 
   PLUGINS.forEach(name => {

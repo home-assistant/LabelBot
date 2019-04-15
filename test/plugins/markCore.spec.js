@@ -39,7 +39,7 @@ describe("markCore", () => {
     assert.deepEqual(getOutput("light/__init__.py"), "core");
   });
 
-  it("coer entity component", () => {
+  it("core entity component", () => {
     assert.deepEqual(getOutput("automation/__init__.py"), "core");
   });
 

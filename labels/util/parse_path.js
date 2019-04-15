@@ -3,7 +3,7 @@ const { entityComponent, coreComponents } = require("../const");
 module.exports = function(file) {
   const parts = file.filename.split("/");
 
-  const rootFolder = parts.shift();
+  const rootFolder = parts.length > 1 ? parts.shift() : undefined;
 
   const result = {
     additions: file.additions,
@@ -17,7 +17,7 @@ module.exports = function(file) {
   };
 
   if (!["tests", "homeassistant"].includes(rootFolder)) {
-    return null;
+    return result;
   }
 
   const subfolder = parts.shift();

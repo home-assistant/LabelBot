@@ -118,4 +118,15 @@ describe("parsePath", () => {
     assert.equal(result.platform, "light");
     assert.equal(result.type, "test");
   });
+
+  it("detects requirements_all.txt", () => {
+    result = parsePath({
+      filename: "requirements_all.txt"
+    });
+    assert.equal(result.filename, "requirements_all.txt");
+    assert.equal(result.core, false);
+    assert.equal(result.component, null);
+    assert.equal(result.platform, null);
+    assert.equal(result.type, null);
+  });
 });
