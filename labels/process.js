@@ -3,8 +3,7 @@ const parsePath = require("./util/parse_path");
 
 const PLUGINS = [
   "componentAndPlatform",
-  "newIntegration",
-  "newPlatform",
+  "newIntegrationOrPlatform",
   "removePlatform",
   "warnOnMergeToMaster",
   "markCore",

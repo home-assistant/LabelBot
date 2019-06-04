@@ -1,6 +1,6 @@
 var assert = require("assert");
 
-var newIntegration = require("../../labels/plugins/newIntegration");
+var newIntegration = require("../../labels/plugins/newIntegrationOrPlatform");
 var parsePath = require("../../labels/util/parse_path");
 
 function getOutput(file, status) {
@@ -19,6 +19,6 @@ describe("newIntegration", () => {
   });
 
   it("add platform to integration", () => {
-    assert.deepEqual(getOutput("mqtt/fan.py", "added"), null);
+    assert.deepEqual(getOutput("mqtt/fan.py", "added"), "new-platform");
   });
 });

@@ -6,5 +6,7 @@ module.exports = function(payload, githubApi, parsed) {
       fil.filename === "__init__.py"
   )
     ? ["new-integration"]
+    : parsed.some(fil => fil.type == "platform" && fil.status == "added")
+    ? ["new-platform"]
     : [];
 };
